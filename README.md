@@ -1,59 +1,150 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **URL Shortener**
+This is a Laravel-based url shortening service, which supports multiple companies and role-based access control. I built this to handle private link management where visibility is restricted based on your role in the company.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## **📦 Prerequisites**
+- PHP >= 8.2
+- Composer
+- MySQL >= 8.0
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## **🛠 Tech Stack**
+- Framework: Laravel
+- Database: MySQL
+- Mail Testing: Mailtrap
+- Background Tasks: Laravel Queue (Database driver)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## **📋 Features & Rules**
+- SuperAdmin: Can view all URLs across the entire system but cannot create them.
+- Admin: Can invite new users to their company and see all company links.
+- Member: Can create links but only see their own links.
+- Invitations: Handled via queued emails for better performance.
+- Redirection: Short URLs are public and redirect to the original destination.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## **🚀 Installation & Setup**
+Follow these steps to get the project running on your local machine 
 
-## Contributing
+### 1. Clone the Project
+Open your terminal and run:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/Pramod900/url-shortener.git
+cd url-shortener
+```
 
-## Code of Conduct
+Since I am using Windows and MySQL, please follow these steps to get the project running.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Database Setup
+    - Open your MySQL tool(like phpMyAdmin or MySQL Workbench).
+    - Create a new database named: url_shortener
 
-## Security Vulnerabilities
+2. Install Dependencies
+Open your terminal in the project folder and run:
+```bash
+composer install
+npm install && npm run build
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Environment Config
+Copy the .env.example file to a new file named .env:
+```bash
+cp .env.example .env
+```
 
-## License
+Open .env and update these specific lines:
+    - DB_DATABASE: url_shortener
+    - QUEUE_CONNECTION: database
+    
+4. Mail Setup Example Configuration in .env
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MAIL_MAILER=smtp
+MAIL_SCHEME=null
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=mailtrap_user_name
+MAIL_PASSWORD=mailtrap_user_password
+MAIL_FROM_ADDRESS="urlshortener123@gmail.com"       <-- You can change it.
+MAIL_FROM_NAME="Url Shortener"                     <-- You can change it.
+
+5. Database Setup Example Configuration in .env
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=url_shortener
+DB_USERNAME=root
+DB_PASSWORD=
+
+6. Initialize the App
+Run these commands to set up the keys and the data:
+```bash
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+
+Note: The seeder will create the initial SuperAdmin Account.
+
+
+
+## **🔑 Login Credentials (For Testing)**
+To login as a SuperAdmin use these credentials after running the command
+```bash
+php artisan migrate --seed
+```
+or
+
+```bash
+php artisan db:seed
+```
+
+- Email: superadmin123@gmail.com
+- Password: 12345678
+
+
+
+## **✉️ How to Test Emails (Queues)**
+I used shouldQueue for the invitations to make the app faster, the emails won't send automatically. You need to start a "worker" to process them.
+
+In a second terminal run this command:
+```bash
+php artisan queue:work
+```
+
+Now you can see mails in your Mailtrap inbox.
+
+
+
+## **🤖 AI Usage**
+I used Gemini during the development of this assignment for the following reasons:
+- Debugging: Solving a htmlspecialchars array error in the Blade views.
+- Queue Setup: Help with the syntax for implementing shouldQueue on the invitation mailables.
+- Documentation: assistance in structuring README.md file.
+- Environment: Help configuring Mailtrap on a windows environment.
+- Testing Url: Got some testing working urls.
+
+### The core logic database design and role-based authorization were implemented by me.
+
+
+
+## **🧪 Test URLs**
+
+```
+https://github.com/laravel/framework/blob/10.x/src/Illuminate/Database/Eloquent/Concerns/HasRelationships.php
+
+https://github.com/tensorflow/tensorflow/tree/master/tensorflow/python/keras/layers
+
+https://laravel.com/docs/10.x/eloquent-relationships
+
+https://kubernetes.io/docs/tutorials/kubernetes-basics/
+
+https://www.theverge.com/2024/1/9/24030667/ai-artificial-intelligence-ces-2024
+
+https://www.youtube.com/watch?v=MFuwkrseXVE
+```

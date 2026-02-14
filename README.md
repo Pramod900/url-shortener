@@ -62,7 +62,7 @@ Open .env and update these specific lines:
     - QUEUE_CONNECTION: database
     
 4. Mail Setup Example Configuration in .env
-
+```
 MAIL_MAILER=smtp
 MAIL_SCHEME=null
 MAIL_HOST=sandbox.smtp.mailtrap.io
@@ -71,6 +71,7 @@ MAIL_USERNAME=mailtrap_user_name
 MAIL_PASSWORD=mailtrap_user_password
 MAIL_FROM_ADDRESS="urlshortener123@gmail.com"       <-- You can change it.
 MAIL_FROM_NAME="Url Shortener"                     <-- You can change it.
+```
 
 5. Database Setup Example Configuration in .env
 

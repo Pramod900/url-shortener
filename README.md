@@ -74,13 +74,14 @@ MAIL_FROM_NAME="Url Shortener"                     <-- You can change it.
 ```
 
 5. Database Setup Example Configuration in .env
-
+```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=url_shortener
 DB_USERNAME=root
 DB_PASSWORD=
+```
 
 6. Initialize the App
 Run these commands to set up the keys and the data:

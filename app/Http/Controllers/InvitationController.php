@@ -46,7 +46,6 @@ class InvitationController extends Controller
 
         try {
             Mail::to($request->email)->send(new InvitationMail($url, $sender, $company));
-
             return back()->with('success', 'An invitation link is sent to ' . $request->email);
         } catch (\Exception $e) {
             Log::error('--- invitation error ---', [
@@ -87,7 +86,7 @@ class InvitationController extends Controller
         }
 
         if ($request->email !== $invitation->email) {
-            return back()->withErrors(['email' => 'Invalid email!']);
+            return back()->withErrors(['email' => 'Please use the email this invitation was sent to!']);
         }
 
         $company = Company::where('name', $request->companyName)->first();

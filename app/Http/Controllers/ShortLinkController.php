@@ -28,6 +28,10 @@ class ShortLinkController extends Controller
 
         $code = Str::random(6);
 
+        if (ShortLink::where('code', $code)->exists()) {
+            $code = Str::random(6);
+        }
+
         ShortLink::create([
             'original_url' => trim($request->url),
             'code' => $code,

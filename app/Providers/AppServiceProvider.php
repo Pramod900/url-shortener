@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Facades\ShortLinkFacade;
-use App\Models\ShortLink;
-use App\Policies\ShortLinkPolicy;
-use App\Services\ShortLinkService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

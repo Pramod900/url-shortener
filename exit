@@ -1,0 +1,37 @@
+[33mcommit 40410ce2a82c961170dfd61f18e8416222e57d3f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Pramod Jangir <pramodjangir172@gmail.com>
+Date:   Thu Feb 19 15:46:42 2026 +0530
+
+    Mistakes figured out
+
+[33mcommit c7023fb67f889548944cfc36cd7b22ccb8ad4060[m
+Author: Pramod Jangir <pramodjangir172@gmail.com>
+Date:   Thu Feb 19 15:04:38 2026 +0530
+
+    session table added
+
+[33mcommit 68a7094ef58d2bfe83ddd6747675dac6f5a88343[m
+Author: Pramod Jangir <pramodjangir604@gmail.com>
+Date:   Sat Feb 14 16:51:50 2026 +0530
+
+    Update README with database setup example
+    
+    Added example database configuration to README.
+
+[33mcommit 8d532ea9d58c5dc774e3c515a50755ca1edccdc4[m
+Author: Pramod Jangir <pramodjangir604@gmail.com>
+Date:   Sat Feb 14 16:51:17 2026 +0530
+
+    Update README.md
+
+[33mcommit c30dc76f1cecf9df1e1321a69591484dff4c1ef6[m
+Author: Pramod Jangir <pramodjangir172@gmail.com>
+Date:   Sat Feb 14 16:49:02 2026 +0530
+
+    Url Shortener Assignment Completed
+
+[33mcommit c3306f9e6ee7ba56c5fd581aa5777805a64b3b99[m
+Author: Pramod Jangir <pramodjangir172@gmail.com>
+Date:   Sat Feb 14 15:15:42 2026 +0530
+
+    Url Shortener Assignment Completed

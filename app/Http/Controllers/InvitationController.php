@@ -20,6 +20,10 @@ class InvitationController extends Controller
     {
         $token = Str::random(10);
 
+        while (Invitation::where('token', $token)->exists()) {
+            $token = Str::random(10);
+        }
+
         $companyName = $request->company;
 
         if (auth()->user()->role === 'admin') {
@@ -80,6 +84,10 @@ class InvitationController extends Controller
 
         if (!$invitation) {
             return redirect()->route('login-page')->withErrors(['invitation' => "Invalid invitation link!"]);
+        }
+
+        if ($request->email !== $invitation->email) {
+            return back()->withErrors(['email' => 'Invalid email!']);
         }
 
         $company = Company::where('name', $request->companyName)->first();

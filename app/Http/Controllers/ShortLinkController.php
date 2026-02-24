@@ -28,10 +28,10 @@ class ShortLinkController extends Controller
 
         $code = Str::random(6);
 
-        if (ShortLink::where('code', $code)->exists()) {
+        while (ShortLink::where('code', $code)->exists()) {
             $code = Str::random(6);
         }
-
+        
         ShortLink::create([
             'original_url' => trim($request->url),
             'code' => $code,
@@ -53,6 +53,10 @@ class ShortLinkController extends Controller
             $query->where('company_id', auth()->user()->company_id);
         } elseif (auth()->user()->role === 'member') {
             $query->where('user_id', auth()->id());
+        } elseif(auth()->user()->role === 'superadmin') {
+            $query->whereHas('user', function($q) {
+                $q->where('role', 'member');
+            });
         }
 
         $links = $query->get();

@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index() {
-         return view('login');
+    public function index()
+    {
+        if (Auth::user()) {
+            return redirect()->route(Auth::user()->role . ".dashboard");
+        }
+        return view('login');
     }
-    
+
     public function login(Request $request)
     {
         $validated = $request->validate([
